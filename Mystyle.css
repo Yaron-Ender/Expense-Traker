@@ -1,0 +1,104 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content:center;
+background-color:#2b2b2b2b;
+}
+main{
+  margin: 50px auto;
+    border: 2px solid red;
+    width: 50%;
+    max-width: 300px;
+    height: 100vh;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content:stretch;
+}
+h1{
+    text-align: center;
+   margin: 30px 0;
+   
+}
+p{
+    font-size:1.3rem;
+
+}
+.balance span{
+    text-transform: uppercase;
+}
+.balance >p{
+font-size: 2.5rem;
+}
+.show-balance{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: #fff;
+    box-shadow: 1px 2px;
+    position: relative;
+}
+.income,.expense{
+    letter-spacing:2.2px;
+text-transform: uppercase;
+flex-grow:1;
+text-align: center;
+padding:30px;
+}
+.income span{
+    font-size: 1.5rem;
+    color:green;
+}
+.expense span{
+    font-size: 1.5rem;
+    color:red;
+}
+.seperate-line{
+    position:absolute;
+    top:25%;
+    height:50%;
+    width: 1px;
+    background-color:#2b2b2b2b;
+}
+.history{
+    margin: 30px 0;
+}
+.expanse-history,.income-history{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    width: 100%;
+    height: 40px;
+    margin-top: 20px;
+    background-color: #fff;
+}
+.expanse-history{
+    border-right:6px solid crimson;
+}
+.income-history{
+    border-right:6px solid green;
+}
+form{
+    margin: 30px 0;
+    border: 2px solid red;
+    display: flex;
+    flex-flow: column wrap;
+}
+input{
+    padding:15px;
+}
+label{
+    margin: 20px 0;
+}
+button{
+    margin-top: 1  0px;
+    padding: 15px;
+}
