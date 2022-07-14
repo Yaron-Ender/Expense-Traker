@@ -13,16 +13,27 @@ const dummytransactions = [
   { id: 4, text: "camera", amount: 150 },
 ];
 let historyArray=[]
-
+let sortAmountObj={all:[],
+plus(){
+//  let plussNum=[];
+ plusNum= this.all.filter(num=>num>=0)
+console.log(plusNum);
+},
+minus(){
+//  let minusNum=[];
+ minusNum= this.all.filter(num=>num<0)
+console.log(minusNum);
+}
+}
 
 //balance box
 const balanceBox =()=>{
-  const amountArray = historyArray.map(obj=>parseInt(obj.amount))
-  const plussArray = amountArray.filter((num)=>{
-    return num>=0
-  })
-  .
-  console.log(plussArray);
+sortAmountObj['all']=[];
+historyArray.forEach((obj)=>{
+sortAmountObj.all.push(parseInt(obj.amount))
+})
+sortAmountObj.plus()
+sortAmountObj.minus()
 }
 
 //build historyUI
@@ -33,9 +44,6 @@ const historyUI=()=>{
 list.innerHTML+=`<li class="plus" data-id=${id}>${text}<span>${amount}<span/></li>`
   })
 }
-
-
-
 
 const handlesubmision= (e)=>{
 e.preventDefault()
