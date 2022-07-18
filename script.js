@@ -20,6 +20,7 @@ const plusNum= this.all.filter(num=>num>=0)
  acc+=curr
  return acc
 },0)
+return plusNum
 },
 minus(){
   const minusNum= this.all.filter(num=>num<0)
@@ -27,21 +28,25 @@ minus(){
     acc+=curr
     return acc
   },0)
+  return minusNum
 }
 }
 //balance UI
 const balanceUI=(plus,minus)=>{
-
+  money_pluse.innerHTML = `${plus}`;
+  money_minus.innerHTML=`${minus}`
+  balance.innerHTML=`${plus+minus}`
 }
 
 //balance box
 const balanceBox =()=>{
-sortAmountObj['all']=[];
-historyArray.forEach((obj)=>{
-sortAmountObj.all.push(parseInt(obj.amount))
-})
-const sumofPlusAmount = sortAmountObj.plus()
-const sumofMinusAmount = sortAmountObj.minus()
+  sortAmountObj['all']=[];
+  historyArray.forEach((obj)=>{
+    sortAmountObj.all.push(parseInt(obj.amount))
+  })
+  const sumofPlusAmount = sortAmountObj.plus()
+  const sumofMinusAmount = sortAmountObj.minus()
+  console.log(sumofPlusAmount);
 balanceUI(sumofPlusAmount,sumofMinusAmount)
 }
 
