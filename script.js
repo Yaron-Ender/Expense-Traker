@@ -15,15 +15,23 @@ const dummytransactions = [
 let historyArray=[]
 let sortAmountObj={all:[],
 plus(){
-//  let plussNum=[];
- plusNum= this.all.filter(num=>num>=0)
-console.log(plusNum);
+const plusNum= this.all.filter(num=>num>=0)
+.reduce((acc,curr)=>{
+ acc+=curr
+ return acc
+},0)
 },
 minus(){
-//  let minusNum=[];
- minusNum= this.all.filter(num=>num<0)
-console.log(minusNum);
+  const minusNum= this.all.filter(num=>num<0)
+  .reduce((acc,curr)=>{
+    acc+=curr
+    return acc
+  },0)
 }
+}
+//balance UI
+const balanceUI=(plus,minus)=>{
+
 }
 
 //balance box
@@ -32,8 +40,9 @@ sortAmountObj['all']=[];
 historyArray.forEach((obj)=>{
 sortAmountObj.all.push(parseInt(obj.amount))
 })
-sortAmountObj.plus()
-sortAmountObj.minus()
+const sumofPlusAmount = sortAmountObj.plus()
+const sumofMinusAmount = sortAmountObj.minus()
+balanceUI(sumofPlusAmount,sumofMinusAmount)
 }
 
 //build historyUI
@@ -41,7 +50,7 @@ const historyUI=()=>{
   list.innerHTML=''
   historyArray.forEach((obj)=>{
     const{id,text,amount}=obj
-list.innerHTML+=`<li class="plus" data-id=${id}>${text}<span>${amount}<span/></li>`
+list.innerHTML+=`<li class=${(amount>=0)?'plus':'minus'} data-id=${id}>${text}<span>${amount}<span/></li>`
   })
 }
 
