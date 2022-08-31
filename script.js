@@ -13,7 +13,8 @@ const dummytransactions = [
   { id: 4, text: "camera", amount: 150 },
 ];
 let historyArray=[]
-let sortAmountObj={all:[],
+let sortAmountObj={
+all:[],
 plus(){
 const plusNum= this.all.filter(num=>num>=0)
 .reduce((acc,curr)=>{
@@ -42,7 +43,7 @@ const balanceUI=(plus,minus)=>{
 const balanceBox =()=>{
   sortAmountObj['all']=[];
   historyArray.forEach((obj)=>{
-    sortAmountObj.all.push(parseInt(obj.amount))
+  sortAmountObj.all.push(parseInt(obj.amount))
   })
   const sumofPlusAmount = sortAmountObj.plus()
   const sumofMinusAmount = sortAmountObj.minus()
@@ -51,14 +52,28 @@ balanceUI(sumofPlusAmount,sumofMinusAmount)
 }
 
 //build historyUI
-const historyUI=()=>{
-  list.innerHTML=''
-  historyArray.forEach((obj)=>{
-    const{id,text,amount}=obj
-list.innerHTML+=`<li class=${(amount>=0)?'plus':'minus'} data-id=${id}>${text}<span>${amount}<span/></li>`
-  })
-}
+const historyUI = () => {
+  list.innerHTML = "";
+  historyArray.forEach((obj) => {
+    const { id, text, amount } = obj;
+    list.innerHTML += `
+<li class=${amount >= 0 ? "plus" : "minus"} data-id=${id}>
+<button class="delete-btn">X</button>
+${text}<span>${amount}<span/></li>
+`;
+  });
+};
+//delete Item
+const deleteItem=(e)=>{
+  if(e.target.nodeName==='BUTTON'){
+let clickedID = parseInt(e.target.parentElement.dataset.id)
+let arrayAfterDeletion =historyArray.filter(item=>item.id!==clickedID)
+historyArray=arrayAfterDeletion
+ historyUI();
+ balanceBox();
 
+  }
+}
 const handlesubmision= (e)=>{
 e.preventDefault()
 const text = e.target.text.value;
@@ -70,4 +85,9 @@ historyArray.push(tamplateObj);
 }
 
 form.addEventListener('submit',handlesubmision)
+list.addEventListener('click',deleteItem)
 
+
+// * delete funcionality
+// * local storage
+// 
