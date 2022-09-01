@@ -5,14 +5,8 @@ const list = document.getElementById("list"); //ul
 const form = document.getElementById("form"); //form
 const text = document.getElementById("text"); //text input
 const amount = document.getElementById("amount"); //amount input
-let id = 4;
-const dummytransactions = [
-  { id: 1, text: "flower", amount: -20 },
-  { id: 2, text: "salary", amount: 300 },
-  { id: 3, text: "book", amount: -10 },
-  { id: 4, text: "camera", amount: 150 },
-];
-let historyArray=[]
+
+let = historyArray=[]
 let sortAmountObj={
 all:[],
 plus(){
@@ -32,6 +26,10 @@ minus(){
   return minusNum
 }
 }
+//update local storage
+const updateLocalStorage=(historyArray)=>{
+ localStorage.setItem("transactions", JSON.stringify(historyArray));
+}
 //balance UI
 const balanceUI=(plus,minus)=>{
   money_pluse.innerHTML = `${plus}`;
@@ -47,7 +45,6 @@ const balanceBox =()=>{
   })
   const sumofPlusAmount = sortAmountObj.plus()
   const sumofMinusAmount = sortAmountObj.minus()
-  console.log(sumofPlusAmount);
 balanceUI(sumofPlusAmount,sumofMinusAmount)
 }
 
@@ -69,6 +66,7 @@ const deleteItem=(e)=>{
 let clickedID = parseInt(e.target.parentElement.dataset.id)
 let arrayAfterDeletion =historyArray.filter(item=>item.id!==clickedID)
 historyArray=arrayAfterDeletion
+updateLocalStorage(historyArray)
  historyUI();
  balanceBox();
 
@@ -80,14 +78,26 @@ const text = e.target.text.value;
 const amount = e.target.amount.value;
 const tamplateObj ={id:Math.floor(Math.random()*1000),text:text,amount:amount}
 historyArray.push(tamplateObj);
+updateLocalStorage(historyArray);
  historyUI();
- balanceBox()
+ balanceBox();
+ getDataFromLS();
+form.reset()
 }
 
 form.addEventListener('submit',handlesubmision)
 list.addEventListener('click',deleteItem)
 
+//get data from localStorage
+const getDataFromLS=()=>{
+let historyArrayFromLS = JSON.parse(localStorage.getItem("transactions"));
+if(historyArray !==null){
+  historyArray=historyArrayFromLS
+ historyUI();
+  balanceBox();
+}else{
+  historyArray=[]
+}
+}
+getDataFromLS()
 
-// * delete funcionality
-// * local storage
-// 
